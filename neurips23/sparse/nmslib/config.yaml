@@ -1,5 +1,5 @@
 sparse-small:
-    nmslib:
+    nmslib1:
       docker-tag: neurips23-sparse-nmslib
       module: neurips23.sparse.nmslib.nmslib
       constructor: SparseNMSLIB
@@ -7,11 +7,11 @@ sparse-small:
       run-groups:
         base:
           args: |
-            [{"M": 16, "efConstruction": 200, "buildthreads": 8}]
+            [{"M": 32, "efConstruction": 512, "buildthreads": 8}]
           query-args: 
-            [[10, 20, 40, 70, 75, 80, 85, 90, 100]]
+            [[32,64,128,256]]
 sparse-1M:
-    nmslib:
+    nmslib_efc256:
       docker-tag: neurips23-sparse-nmslib
       module: neurips23.sparse.nmslib.nmslib
       constructor: SparseNMSLIB
@@ -19,11 +19,11 @@ sparse-1M:
       run-groups:
         base:
           args: |
-            [{"M": 16, "efConstruction": 200, "buildthreads": 8}]
+            [{"M": 32, "efConstruction": 256, "buildthreads": 8}]
           query-args: 
-            [[10, 20, 40, 60, 70, 75, 80, 90, 100]]
+            [[32,64,128,256]]
 sparse-full:
-    nmslib:
+    nmslib_efc256:
       docker-tag: neurips23-sparse-nmslib
       module: neurips23.sparse.nmslib.nmslib
       constructor: SparseNMSLIB
@@ -31,6 +31,28 @@ sparse-full:
       run-groups:
         base:
           args: |
-            [{"M": 16, "efConstruction": 200, "buildthreads": 8}]
+            [{"M": 32, "efConstruction": 256, "buildthreads": 8}]
           query-args: 
-            [[20, 40, 45, 48, 50, 52, 55, 57, 70, 75, 80, 85, 90]]
+            [[32,64,128,256]]
+    nmslib_efc512:
+      docker-tag: neurips23-sparse-nmslib
+      module: neurips23.sparse.nmslib.nmslib
+      constructor: SparseNMSLIB
+      base-args: ["@metric"]
+      run-groups:
+        base:
+          args: |
+            [{"M": 32, "efConstruction": 512, "buildthreads": 8}]
+          query-args: 
+            [[32,64,128,256,512]]
+    nmslib_efc1024:
+      docker-tag: neurips23-sparse-nmslib
+      module: neurips23.sparse.nmslib.nmslib
+      constructor: SparseNMSLIB
+      base-args: ["@metric"]
+      run-groups:
+        base:
+          args: |
+            [{"M": 32, "efConstruction": 1024, "buildthreads": 8}]
+          query-args: 
+            [[32,64,128,256,512]]

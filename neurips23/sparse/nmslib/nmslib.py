@@ -20,7 +20,7 @@ class SparseNMSLIB(BaseSparseANN):
         print("begin fit")
         ds = DATASETS[dataset]()
         
-        index = nmslib.init(method='hnsw', space='negdotprod_sparse', data_type=nmslib.DataType.SPARSE_VECTOR)
+        index = nmslib.init(method='hnsw', space='negdotprod_sparse_fast', data_type=nmslib.DataType.SPARSE_VECTOR)
         N_VEC_LIMIT = 100000 # batch size
         it = ds.get_dataset_iterator(N_VEC_LIMIT)
         id_start = 0
@@ -28,7 +28,7 @@ class SparseNMSLIB(BaseSparseANN):
             index.addDataPointBatch(d,np.arange(id_start,id_start+d.shape[0]))
             id_start += d.shape[0]
         start = time.time()
-        index.createIndex(self.index_time_params) 
+        index.createIndex(self.index_time_params, print_progress=True)
         end = time.time() 
         print('Index-time parameters', self.index_time_params)
         print('Indexing time = %f' % (end-start))
