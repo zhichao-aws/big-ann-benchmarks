@@ -2,23 +2,35 @@ sparse-small:
     lucene:
       docker-tag: neurips23-sparse-lucene
       module: neurips23.sparse.lucene.lucene
-      constructor: SparseNMSLIB
+      constructor: LuceneEngine
       base-args: ["@metric"]
       run-groups:
         base:
           args: |
-            [{"M": 32, "efConstruction": 512, "buildthreads": 8}]
+            [{"x": 1}]
           query-args: 
-            [[32,64,128,256]]
+            [[1]]
 sparse-1M:
     lucene:
       docker-tag: neurips23-sparse-lucene
       module: neurips23.sparse.lucene.lucene
-      constructor: SparseNMSLIB
+      constructor: LuceneEngine
       base-args: ["@metric"]
       run-groups:
         base:
           args: |
-            [{"M": 32, "efConstruction": 256, "buildthreads": 8}]
+            [{"x": 1}]
           query-args: 
-            [[32,64,128,256]]
+            [[1]]
+sparse-full:
+    lucene:
+      docker-tag: neurips23-sparse-lucene
+      module: neurips23.sparse.lucene.lucene
+      constructor: LuceneEngine
+      base-args: ["@metric"]
+      run-groups:
+        base:
+          args: |
+            [{"x": 1}]
+          query-args: 
+            [[1]]
